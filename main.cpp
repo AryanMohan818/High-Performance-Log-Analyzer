@@ -3,14 +3,16 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <chrono> // To measure speed
+#include <chrono> 
 
 using namespace std;
+
+// Optimization: Use a larger buffer for file reading to reduce disk I/O
+const int BUFFER_SIZE = 128 * 1024; // 128KB buffer
 
 int main() {
     cout << "🚀 STARTING HIGH-PERFORMANCE LOG ANALYSIS..." << endl;
 
-    // 1. Start the Timer (To prove speed on your resume)
     auto start = chrono::high_resolution_clock::now();
 
     ifstream file("server_logs.txt");
@@ -19,16 +21,19 @@ int main() {
         return 1;
     }
 
+    // Optimization: Set a manual buffer for the file stream
+    char buffer[BUFFER_SIZE];
+    file.rdbuf()->pubsetbuf(buffer, BUFFER_SIZE);
+
     string line;
     map<string, int> stats;
     long long total_lines = 0;
 
-    // 2. The "Fast Read" Loop
-    // We parse millions of lines here
+    // Fast Read Loop
     while (getline(file, line)) {
         total_lines++;
         
-        // Simple manual parsing (Faster than Regex for this case)
+        // Manual optimization: Check the most common cases first
         if (line.find("| ERROR |") != string::npos) {
             stats["ERROR"]++;
         } 
@@ -42,20 +47,15 @@ int main() {
 
     file.close();
 
-    // 3. Stop Timer
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double> duration = end - start;
 
-    // 4. Report
     cout << "--------------------------------------" << endl;
     cout << "📊 ANALYSIS REPORT" << endl;
     cout << "--------------------------------------" << endl;
-    cout << "Total Lines Processed: " << total_lines << endl;
-    cout << "🔴 Critical Errors:    " << stats["CRITICAL"] << endl;
-    cout << "🟠 Standard Errors:    " << stats["ERROR"] << endl;
-    cout << "🟡 Warnings:           " << stats["WARNING"] << endl;
-    cout << "--------------------------------------" << endl;
-    cout << "⚡ Time Taken: " << duration.count() << " seconds" << endl;
+    cout << "Total Lines:        " << total_lines << endl;
+    cout << "🔴 Critical Errors: " << stats["CRITICAL"] << endl;
+    cout << "⚡ Time Taken:      " << duration.count() << " seconds" << endl;
     cout << "--------------------------------------" << endl;
 
     return 0;
