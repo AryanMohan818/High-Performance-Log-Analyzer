@@ -10,10 +10,10 @@ It reads raw log files, filters for critical errors (WARN/ERROR), and generates 
 ## ⚡ Performance Benchmarks
 | Metric | Result |
 | :--- | :--- |
-| **Dataset Size** | 1,000,000+ Lines |
-| **Execution Time** | **1.12 Seconds** |
-| **Throughput** | ~900k lines/sec |
-| **Complexity** | O(N) Linear Time |
+| **Dataset Size** | 1,000,000+ Lines |.
+| **Execution Time** | **1.12 Seconds** |.
+| **Throughput** | ~900k lines/sec |.
+| **Complexity** | O(N) Linear Time |.
 
 ## 🛠️ Key Optimizations
 * **Custom I/O Buffering:** Implemented a **128KB custom buffer** for file streams to minimize expensive disk seek operations and context switching.
@@ -33,24 +33,21 @@ It reads raw log files, filters for critical errors (WARN/ERROR), and generates 
    git clone [https://github.com/AryanMohan818/High-Performance-Log-Analyzer.git](https://github.com/AryanMohan818/High-Performance-Log-Analyzer.git)
    cd High-Performance-Log-Analyzer
 2. **Compile with Optimization**
-   Note: The -O3 flag is crucial for achieving sub-1.2s performance.
-   **Bash Command** = g++ -O3 main.cpp -o log_parser
+*   Note: The -O3 flag is crucial for achieving sub-1.2s performance.
+*   **Bash Command** = g++ -O3 main.cpp -o log_parser
 3. **Run the Analizer**
-   **Bash Command** = ./log_parser
+*   **Bash Command** = ./log_parser
 
 📊 Sample Output
-[INFO] Processing Log File...
-[SUCCESS] Processing Complete.
+* [INFO] Processing Log File...
+* [SUCCESS] Processing Complete.
+* ----------------------------------
+* Total Lines Processed: 1,000,000
+* Errors Found: 5,420
+* Warnings Found: 12,300
+* Time Taken: 1.12287 seconds
 ----------------------------------
-Total Lines Processed: 1,000,000
-Errors Found: 5,420
-Warnings Found: 12,300
-Time Taken: 1.12287 seconds
-----------------------------------
-### 💡 **Why this wins**:
-1.  **The Table:** Recruiters scan fast. A table showing **"1.12 Seconds"** proves you measured your code.
-2.  **"O(N) Linear Time":** This connects your project directly to your Data Structures & Algorithms coursework.
-3.  **"Loop Unrolling & Vectorization":** These are specific terms related to the `-O3` flag. Mentioning them shows you know *what* the compiler is doing, not just that you blindly typed a command.
 
-**Shall we knock out the last one (The Flutter Dashboard) so your portfolio is 100% complete?**
+
+
 
